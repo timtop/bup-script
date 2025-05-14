@@ -1,3 +1,4 @@
+alert("Script is working");
 const navbar = document.querySelector("#nav");
 const heroHeight = document.querySelector(".hero").offsetHeight;
 let lastScrollY = window.scrollY;
