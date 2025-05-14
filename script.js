@@ -1,7 +1,7 @@
-const navbar = document.querySelector(".navbar");
+const navbar = document.querySelector("#nav");
 const heroHeight = document.querySelector(".hero").offsetHeight;
 let lastScrollY = window.scrollY;
-console.log("Last scroll Y = " + lastScrollY);
+// console.log("Last scroll Y = " + lastScrollY);
 let navbarVisible = false;
 
 function showNavbar() {
@@ -20,11 +20,11 @@ function hideNavbar() {
 
 window.addEventListener("scroll", () => {
   const currentScrollY = window.scrollY;
-  console.log("current scroll Y = " + lastScrollY);
+  //   console.log("current scroll Y = " + lastScrollY);
 
   const scrollingUp = currentScrollY < lastScrollY;
 
-  console.log("scroll up is = " + scrollingUp);
+  //   console.log("scroll up is = " + scrollingUp);
 
   if (currentScrollY > heroHeight && scrollingUp) {
     showNavbar();
