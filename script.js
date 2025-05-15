@@ -1,4 +1,21 @@
-alert("Script is working");
+// Lenis animation begins
+const lenis = new Lenis();
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+// lenis.on("scroll", ScrollTrigger.update);
+
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+//Lenis animation ends
+
+// Navbar animation begins
 const navbar = document.querySelector("#nav");
 const heroHeight = document.querySelector(".hero").offsetHeight;
 let lastScrollY = window.scrollY;
@@ -19,7 +36,7 @@ function hideNavbar() {
   }
 }
 
-window.addEventListener("scroll", () => {
+lenis.on("scroll", () => {
   const currentScrollY = window.scrollY;
   //   console.log("current scroll Y = " + lastScrollY);
 
@@ -35,3 +52,5 @@ window.addEventListener("scroll", () => {
 
   lastScrollY = currentScrollY;
 });
+
+// Navbar animation ends
