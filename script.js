@@ -15,10 +15,27 @@ gsap.ticker.add((time) => {
 });
 //Lenis animation ends
 
+// Showing and hiding navigation
+const menus = document.querySelectorAll("#menu");
+const fullNav = document.querySelector("#openedNav");
+
+let isNavOpened = false;
+
+menus.forEach((menu) => {
+  menu.addEventListener("click", () => {
+    if (!isNavOpened) {
+      fullNav.style.display = "flex";
+      isNavOpened = true;
+    } else {
+      fullNav.style.display = "none";
+      isNavOpened = false;
+    }
+  });
+});
+
 // Navbar animation begins
 const navbar = document.querySelector("#nav");
 const heroHeight = document.querySelector(".hero").offsetHeight;
-const navContent = document.querySelector("#nav-content");
 
 let lastScrollY = window.scrollY;
 let navbarVisible = false;
