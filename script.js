@@ -15,20 +15,6 @@ gsap.ticker.add((time) => {
 });
 //Lenis animation ends
 
-// Check screen size
-let isMobile = false;
-
-function checkDevice() {
-  if (window.innerWidth <= 767) {
-    isMobile = true;
-  } else {
-    isMobile = false;
-  }
-}
-checkDevice();
-window.addEventListener("resize", checkDevice);
-//Check screen size ends
-
 // Navbar animation begins
 const navbar = document.querySelector("#nav");
 const heroHeight = document.querySelector(".hero").offsetHeight;
@@ -55,20 +41,6 @@ lenis.on("scroll", () => {
   const currentScrollY = window.scrollY;
   const scrollingUp = currentScrollY < lastScrollY;
   let belowHero = currentScrollY > heroHeight;
-  let navContentDisplayValue = window.getComputedStyle(navContent).display;
-
-  //This prevent the navbar from hiding when you scroll up when it is opened
-  if (
-    isMobile &&
-    navbarVisible &&
-    !scrollingUp &&
-    belowHero &&
-    navContentDisplayValue === "flex"
-  ) {
-    lastScrollY = currentScrollY;
-    return;
-  }
-  //Ends
 
   if (belowHero && scrollingUp) {
     showNavbar();
