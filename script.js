@@ -67,5 +67,13 @@ lenis.on("scroll", () => {
 
   lastScrollY = currentScrollY;
 });
-
 // Navbar animation ends
+
+// About Line animation
+gsap.to(".yellow-stripe-lg", {
+  delay: 0.5,
+  x: "-100%",
+  stagger: 0.1,
+  duration: 0.5,
+  ease: "power2.in",
+});
