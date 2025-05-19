@@ -1,3 +1,6 @@
+// Init Gsap plugins
+gsap.registerPlugin(ScrollTrigger);
+
 // Lenis animation begins
 const lenis = new Lenis();
 
@@ -31,6 +34,13 @@ menus.forEach((menu) => {
       isNavOpened = false;
     }
   });
+});
+// Close the nav if the window is resized
+window.addEventListener("resize", () => {
+  if (isNavOpened) {
+    fullNav.style.display = "none";
+    isNavOpened = false;
+  }
 });
 
 // Navbar animation begins
@@ -70,10 +80,26 @@ lenis.on("scroll", () => {
 // Navbar animation ends
 
 // About Line animation
-gsap.to(".yellow-stripe-lg", {
+gsap.from(".yellow-stripe-lg", {
   delay: 0.5,
-  x: "-100%",
-  stagger: 0.1,
+  x: "100%",
+  stagger: 0.08,
   duration: 0.5,
   ease: "power2.in",
+});
+
+// BUP Footer animation
+gsap.to(".line", {
+  clipPath: "inset(0% 0% 0% 0%)",
+  duration: 0.2,
+  ease: "power4.inOut",
+  stagger: {
+    each: 0.1,
+    from: "left",
+  },
+  scrollTrigger: {
+    trigger: ".line",
+    start: "50% bottom",
+    // markers: true,
+  },
 });
