@@ -42,6 +42,7 @@ window.addEventListener("resize", () => {
     isNavOpened = false;
   }
 });
+// Showing and hiding navigation ends
 
 // Navbar animation begins
 const navbar = document.querySelector("#nav");
@@ -79,6 +80,15 @@ lenis.on("scroll", () => {
 });
 // Navbar animation ends
 
+// Card line animation
+// gsap.from(".yellow-stripe-card", {
+//   // delay: 0.05,
+//   x: "-100%",
+//   stagger: 0.08,
+//   duration: 0.5,
+//   ease: "power2.in",
+// });
+
 // About Line animation
 gsap.set(".yellow-stripe-lg", {
   x: "100%",
@@ -94,7 +104,7 @@ gsap.to(".yellow-stripe-lg", {
 
 // News line animation
 gsap.from(".c-yellowbox", {
-  delay: 0.2,
+  // delay: 0.2,
   x: "-100%",
   stagger: 0.08,
   duration: 0.5,
@@ -154,4 +164,31 @@ stripes.forEach((stripe) => {
   );
 
   observer.observe(stripe);
+});
+
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Trigger GSAP animation
+        gsap.from(entry.target, {
+          x: "-100%",
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.in",
+        });
+
+        // Optionally: unobserve after first trigger
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.1, // Trigger when 10% of the element is visible
+  }
+);
+
+// Observe all .yellow-stripe-card elements
+document.querySelectorAll(".yellow-stripe-card").forEach((el) => {
+  observer.observe(el);
 });
