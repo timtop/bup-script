@@ -80,9 +80,22 @@ lenis.on("scroll", () => {
 // Navbar animation ends
 
 // About Line animation
-gsap.from(".yellow-stripe-lg", {
-  delay: 0.5,
+gsap.set(".yellow-stripe-lg", {
   x: "100%",
+});
+
+gsap.to(".yellow-stripe-lg", {
+  delay: 0.5,
+  x: "0%",
+  stagger: 0.08,
+  duration: 0.5,
+  ease: "power2.in",
+});
+
+// News line animation
+gsap.from(".c-yellowbox", {
+  delay: 0.2,
+  x: "-100%",
   stagger: 0.08,
   duration: 0.5,
   ease: "power2.in",
@@ -102,4 +115,43 @@ gsap.to(".line", {
     start: "50% bottom",
     // markers: true,
   },
+});
+
+// strips animation around the pictures
+const stripes = document.querySelectorAll("#stripe");
+
+stripes.forEach((stripe) => {
+  // Set initial rotation
+  gsap.set(stripe, {
+    rotationX: "90deg",
+  });
+
+  const interactionCallBack = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Animate when in view
+        gsap.to(entry.target, {
+          rotationX: "0deg",
+          duration: 1.5,
+          ease: "power2.out",
+          transformOrigin: "center center",
+        });
+
+        // Stop observing this one
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const interactionOptions = {
+    rootMargin: "0px -10% -10% 0px",
+    threshold: 0.9,
+  };
+
+  const observer = new IntersectionObserver(
+    interactionCallBack,
+    interactionOptions
+  );
+
+  observer.observe(stripe);
 });
