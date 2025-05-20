@@ -36,10 +36,19 @@ menus.forEach((menu) => {
   });
 });
 // Close the nav if the window is resized
+// This help prevent vertical resizing closing from chrome and safari URLbar
+let prevWidth = window.innerWidth;
+
 window.addEventListener("resize", () => {
-  if (isNavOpened) {
-    fullNav.style.display = "none";
-    isNavOpened = false;
+  const currentWidth = window.innerWidth;
+
+  if (currentWidth !== prevWidth) {
+    prevWidth = currentWidth;
+
+    if (isNavOpened) {
+      fullNav.style.display = "none";
+      isNavOpened = false;
+    }
   }
 });
 // Showing and hiding navigation ends
@@ -166,11 +175,11 @@ stripes.forEach((stripe) => {
   observer.observe(stripe);
 });
 
+// Card line nav
 const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Trigger GSAP animation
         gsap.from(entry.target, {
           x: "-100%",
           duration: 0.5,
@@ -178,13 +187,12 @@ const observer = new IntersectionObserver(
           ease: "power2.in",
         });
 
-        // Optionally: unobserve after first trigger
         observer.unobserve(entry.target);
       }
     });
   },
   {
-    threshold: 0.1, // Trigger when 10% of the element is visible
+    threshold: 0.1,
   }
 );
 
