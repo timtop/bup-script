@@ -183,7 +183,7 @@ const observer = new IntersectionObserver(
         gsap.from(entry.target, {
           x: "-100%",
           duration: 0.5,
-          stagger: 0.08,
+          stagger: 0.2,
           ease: "power2.in",
         });
 
@@ -199,4 +199,36 @@ const observer = new IntersectionObserver(
 // Observe all .yellow-stripe-card elements
 document.querySelectorAll(".yellow-stripe-card").forEach((el) => {
   observer.observe(el);
+});
+
+// Accordion functionality
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    faqItems.forEach((i) => {
+      const answer = i.querySelector(".faq-answer");
+      const horizontalLine = i.querySelector(".icon-horizontal-line");
+
+      if (i === item) {
+        // Toggle the clicked item
+        const isOpen = i.classList.contains("active");
+
+        if (isOpen) {
+          i.classList.remove("active");
+          answer.style.height = "0px";
+          horizontalLine.style.transform = "rotate(0deg)";
+        } else {
+          i.classList.add("active");
+          answer.style.height = answer.scrollHeight + "px";
+          horizontalLine.style.transform = "rotate(90deg)";
+        }
+      } else {
+        // Close all others
+        i.classList.remove("active");
+        answer.style.height = "0px";
+        horizontalLine.style.transform = "rotate(0deg)";
+      }
+    });
+  });
 });
