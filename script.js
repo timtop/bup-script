@@ -181,7 +181,7 @@ const observer = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         gsap.from(entry.target, {
-          x: "-100%",
+          x: "-120%",
           duration: 0.5,
           stagger: 0.2,
           ease: "power2.in",
@@ -197,7 +197,7 @@ const observer = new IntersectionObserver(
 );
 
 // Observe all .yellow-stripe-card elements
-document.querySelectorAll(".yellow-stripe-card").forEach((el) => {
+document.querySelectorAll(".stripes-holder-card").forEach((el) => {
   observer.observe(el);
 });
 
