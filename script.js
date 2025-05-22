@@ -232,3 +232,43 @@ faqItems.forEach((item) => {
     });
   });
 });
+
+// Handling form submission manually to google sheet and prevent redirect
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("email-form");
+  const successMessage = document.querySelector(".w-form-done");
+  const errorMessage = document.querySelector(".w-form-fail");
+
+  const postUrl =
+    "https://script.google.com/macros/s/AKfycbxR_FbmYWqlerN_hSEXCT2njp0fgDe0BeSjQPI_zhTgfoQ2gL2Sd4Mvg2ASWjWHgFwqjA/exec";
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Hide previous messages
+    successMessage.style.display = "none";
+    errorMessage.style.display = "none";
+
+    // Prepare form data
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData);
+
+    // Send form data using Fetch
+    fetch(postUrl, {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => {
+        if (response.ok) {
+          form.reset();
+          successMessage.style.display = "block";
+        } else {
+          throw new Error("Submission failed.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+        errorMessage.style.display = "block";
+      });
+  });
+});
