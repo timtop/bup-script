@@ -272,3 +272,15 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
+// Tyre parralax animation on about page
+gsap.to(".about-banner-img-copy", {
+  y: "-20%",
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".three-blocks-grid",
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1,
+  },
+});
