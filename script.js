@@ -273,13 +273,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Tyre parralax animation on about page
 gsap.to(".about-banner-img-copy", {
-  y: "-20%", // Move image up
+  y: "-20%",
   ease: "none",
   scrollTrigger: {
     trigger: ".three-blocks-grid",
-    start: "top bottom", // when container hits bottom of viewport
-    end: "bottom top", // when container leaves top of viewport
-    scrub: 1, // enables smooth scroll scrubbing
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1,
   },
 });
